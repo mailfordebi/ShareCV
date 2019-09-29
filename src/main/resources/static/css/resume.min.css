@@ -136,8 +136,8 @@ p.lead {
 }
 
 section.resume-section {
-	padding-top: 5rem !important;
-	padding-bottom: 5rem !important;
+	padding-top: 3rem !important;
+	padding-bottom: 3rem !important;
 	max-width: 75rem
 }
 
@@ -147,10 +147,10 @@ section.resume-section .resume-item .resume-date {
 
 @media ( min-width :768px) {
 	section.resume-section {
-		min-height: 100vh
+		/* min-height: 58vh */
 	}
 	section.resume-section .resume-item .resume-date {
-		min-width: 18rem
+		min-width: 10rem
 	}
 }
 
@@ -209,4 +209,9 @@ a:active, a:focus, a:hover {
     height: 40px;
     margin-top: 6px;
     padding-top: 3px;
+}
+
+.text-decoration{
+	text-align: justify;
+	max-width: 870px;
 }

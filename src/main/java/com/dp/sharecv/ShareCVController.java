@@ -20,6 +20,7 @@ import org.htmlcleaner.TagNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -78,11 +79,49 @@ public class ShareCVController {
 		return modelAndView;
 	}
 
-	/*
-	 * @RequestMapping("/profile") public ModelAndView profile() { ModelAndView
-	 * modelAndView = new ModelAndView(); modelAndView.setViewName("profile");
-	 * return modelAndView; }
-	 */
+	@RequestMapping(value = "/{email}", method = RequestMethod.GET)
+	public ModelAndView getProfile(@PathVariable("email") String email, HttpServletRequest request) {
+		ModelAndView modelAndView = new ModelAndView();
+
+		CVInfo cv = cvDao.getCVDetails(email);
+		modelAndView.addObject("cvInfo", cv);
+		request.getSession().setAttribute("cvInfo", cv);
+		modelAndView.setViewName("publish_cv");
+		return modelAndView;
+	}
+
+	@RequestMapping(value = "/resetpassword", method = RequestMethod.POST)
+	public ModelAndView resetPassword(@RequestParam("resetEmail") String email,
+			@RequestParam("reset_pass") String password, @RequestParam("reset_pass_again") String re_password,
+			HttpServletRequest request) {
+		ModelAndView modelAndView = new ModelAndView();
+		if (StringUtils.isEmpty(password) || StringUtils.isEmpty(re_password) || (!password.equals(re_password))) {
+			modelAndView.addObject("isLoggedIn", false);
+			modelAndView.addObject("error", "Password are not matching");
+			modelAndView.setViewName("login");
+		} else {
+			User user = cvDao.getUserDetails(email, null);
+			if (user == null) {
+				modelAndView.addObject("isLoggedIn", false);
+				modelAndView.addObject("error", "User doesn't exist with this email.");
+				modelAndView.setViewName("login");
+			} else {
+				User user_1 = new User();
+				user_1.setEmail(email);
+				user_1.setPassword(password);
+				if (cvDao.updateUser(user_1)) {
+					modelAndView.addObject("isLoggedIn", true);
+					modelAndView.addObject("error", "Password updated");
+					modelAndView.setViewName("login");
+				} else {
+					modelAndView.addObject("isLoggedIn", false);
+					modelAndView.addObject("error", "Unable to upadate password");
+					modelAndView.setViewName("login");
+				}
+			}
+		}
+		return modelAndView;
+	}
 
 	@RequestMapping(value = "/signup", method = RequestMethod.POST)
 	public ModelAndView signup(@RequestParam("user_name") String name, @RequestParam("user_email") String email,
@@ -95,6 +134,11 @@ public class ShareCVController {
 		String msg = cvDao.newUser(user);
 		if (CVUtil.REGISTER_SUCCESS.equalsIgnoreCase(msg)) {
 			modelAndView.addObject("isLoggedIn", true);
+			modelAndView.addObject("user", user);
+			if (!StringUtils.isEmpty(user.getName())) {
+				String userLastName = user.getName().substring(user.getName().lastIndexOf(" ") + 1);
+				modelAndView.addObject("username", userLastName);
+			}
 			modelAndView.setViewName("index");
 		} else {
 			modelAndView.addObject("isLoggedIn", false);
@@ -109,6 +153,11 @@ public class ShareCVController {
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("final_cv");
 		return modelAndView;
+	}
+
+	@RequestMapping("/downloadPublishedCV")
+	public void downloadPublishedCV(HttpServletResponse response) throws Exception {
+		downloadPDF(response);
 	}
 
 	@RequestMapping(value = "/downloadPDF", method = RequestMethod.POST)
@@ -402,12 +451,12 @@ public class ShareCVController {
 		if (cvDao.saveCV(cv)) {
 			ModelAndView modelAndView = new ModelAndView();
 			modelAndView.addObject("cvInfo", cv);
-			modelAndView.setViewName("profile");
+			modelAndView.setViewName("publish_cv");
 			return modelAndView;
 		} else {
 			ModelAndView modelAndView = new ModelAndView();
 			modelAndView.addObject("saveerror", "Unable to save");
-			modelAndView.setViewName("profile");
+			modelAndView.setViewName("publish_cv");
 			return modelAndView;
 		}
 

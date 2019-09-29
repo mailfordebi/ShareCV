@@ -43,9 +43,11 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav">
-      	<li class="nav-item">
-          <a class="nav-link js-scroll-trigger" href="${pageContext.request.contextPath}/index">Home</a>
-        </li>
+      	<c:if test="${sessionScope.isLoggedIn}">
+     		<li class="nav-item">
+         	 <a class="nav-link js-scroll-trigger" href="${pageContext.request.contextPath}/index">My Home</a>
+       		 </li>
+        </c:if>
         <li class="nav-item">
           <a class="nav-link js-scroll-trigger" href="#about">About</a>
         </li>
@@ -62,14 +64,13 @@
         <li class="nav-item">
           <a class="nav-link js-scroll-trigger" href="#education">Education</a>
         </li>
-        
         <c:forEach items="${cvInfo.newSummary}" var="summary">
         	<li class="nav-item">
           		<a class="nav-link js-scroll-trigger" href="#${summary.key}">${summary.key}</a>
        		</li>
 		</c:forEach>
-		<li class="nav-item" id="li_nav_item_save">
-          <a class="btn btn-dark save-data" href="${pageContext.request.contextPath}/saveCV"><strong>Save</strong></a>
+		<li class="nav-item">
+          <a class="nav-link js-scroll-trigger" href="${pageContext.request.contextPath}/downloadPublishedCV">Download</a>
         </li>
       </ul>
     </div>
@@ -92,7 +93,7 @@
         	Phone: 
         	<c:forEach var="phone" items="${cvInfo.phoneNos}">
                <c:if test="${not empty phone}">
-               ${phone},
+               ${phone} 
                 </c:if>
             </c:forEach>
             </c:if>
@@ -101,7 +102,7 @@
             Websites: 
             <c:forEach var="website" items="${cvInfo.websites}">
                <c:if test="${not empty website}">
-               <a href="${website}" target="_blank" class="anchor_decoration">${website},</a>
+               <a href="${website}" target="_blank" class="anchor_decoration">${website} </a>
                </c:if>
             </c:forEach>
             </c:if>
@@ -261,22 +262,6 @@
 	</c:forEach>
 
   </div>
-  <c:if test="${!sessionScope.isLoggedIn}">
-  <div class="modal fade" id="publishProfile" role="dialog">
-     <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-body modal-footer-div">
-          <p>Do you want to maintain/publish your profile in cloud?</p>
-        </div>
-        <div class="modal-footer modal-footer-div">
-          <a href="${pageContext.request.contextPath}/login?page=profile" class="btn btn-success">Publish</a>
-          <a href="${pageContext.request.contextPath}/pdf" class="btn btn-secondary">Skip</a>
-        </div>
-      </div>
-    </div>
-  </div>
-  </c:if>
-
   <!-- Bootstrap core JavaScript -->
   <script src="vendor/jquery/jquery.min.js"></script>
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -289,5 +274,4 @@
   <script src="js/util.js"></script>
 
 </body>
-
 </html>

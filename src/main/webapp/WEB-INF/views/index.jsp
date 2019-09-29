@@ -59,7 +59,7 @@
            	<li class="menu-has-children"><a href="#">Hello, ${sessionScope.username}</a>
             <ul>
               <li><a href="${pageContext.request.contextPath}/logout">Logout</a></li>
-              <li><a href="#">Profile</a></li>
+              <li><a href="${pageContext.request.contextPath}/${sessionScope.user.email}">Profile</a></li>
             </ul>
           </li>
            </c:if>
@@ -98,11 +98,6 @@
   </section><!-- #intro -->
 
   <main id="main">
-
-    <!--==========================
-      About Us Section
-    ============================-->
-    
 
     <!--==========================
       Product Featuress Section

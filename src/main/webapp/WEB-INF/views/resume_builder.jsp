@@ -59,7 +59,7 @@
            	<li class="menu-has-children"><a href="#">Hello, ${username}</a>
             <ul>
               <li><a href="${pageContext.request.contextPath}/logout">Logout</a></li>
-              <li><a href="#">Profile</a></li>
+              <li><a href="${pageContext.request.contextPath}/${sessionScope.user.email}">Profile</a></li>
             </ul>
           </li>
            </c:if>

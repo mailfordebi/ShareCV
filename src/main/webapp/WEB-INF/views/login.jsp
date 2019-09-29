@@ -58,9 +58,17 @@
 			</button>
 		</form>
 
-		<form action="/reset/password/" class="form-reset">
-			<input type="email" id="resetEmail" class="form-control"
+		<form action="${pageContext.request.contextPath}/resetpassword" class="form-reset" name="resetpassword" method="post">
+			<h1 class="h3 mb-3 font-weight-normal" style="text-align: center">
+				Reset Password</h1>
+			<input type="email" id="resetEmail" name="resetEmail" class="form-control"
 				placeholder="Email address" required="" autofocus="">
+			<input
+				type="password" id="reset_pass" name="reset_pass" class="form-control"
+				placeholder="Password" required autofocus="">
+			<input
+				type="password" id="reset_pass_again" name="reset_pass_again" class="form-control"
+				placeholder="Re-enter Password" required autofocus="">		
 			<button class="btn btn-primary btn-block" type="submit">Reset
 				Password</button>
 			<a href="#" id="cancel_reset"><i class="fas fa-angle-left"></i>
