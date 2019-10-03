@@ -26,7 +26,6 @@
 
   <!-- Custom styles for this template -->
   <link href="css/resume.min.css" rel="stylesheet">
-
 </head>
 
 <body id="page-top">
@@ -80,7 +79,7 @@
       <div class="w-100">
         <h1 class="mb-0">${cvInfo.fullName}
         </h1>
-        <div class="subheading mb-5">
+        <div class="subheading">
         	<c:if test="${not empty cvInfo.address1}">
         	${cvInfo.address1},
         	</c:if>
@@ -110,11 +109,13 @@
          		Email: <a href="mailto:${cvInfo.email}" class="anchor_decoration">${cvInfo.email}</a>
          	</c:if>
         </div>
-        <p class="lead mb-5 text-decoration">
-        	<c:forEach var="summary" items="${cvInfo.profileSummaries}">
-               ${summary}.<br>
-            </c:forEach>
-        </p>
+        <div>
+        	<ul style="list-style-type: disc;margin-top: 15px;margin-bottom: 25px;">
+				<c:forEach var="summary" items="${cvInfo.profileSummaries}">
+               		<li>${summary}</li>
+            	</c:forEach>
+			</ul>
+        </div>
         <div class="social-icons">
         <c:if test="${not empty cvInfo.linkedin}">
           <a href="https://${cvInfo.linkedin}" target="_blank">
@@ -289,5 +290,6 @@
   <script src="js/util.js"></script>
 
 </body>
+
 
 </html>

@@ -303,3 +303,24 @@ $(window).on('load',function(){
 function showDataSave(){
 	document.getElementById('li_nav_item_save').hidden = false;
 }
+
+function ExportPdf(name) {
+	document.getElementById('cv123').hidden = false;
+	kendo.drawing.drawDOM("#cv123", {
+		forcePageBreak: ".page-break", // add this class to each element where you want manual page break
+		paperSize : "A4",
+		margin : {
+			top : "1cm",
+			bottom : "1cm",
+			left:"1cm",
+			right:"1cm"
+		},
+		scale : 0.6,
+		height : 500,
+		template: $("#page-template").html(),
+        keepTogether: ".prevent-split"
+	}).then(function(group) {
+		document.getElementById('cv123').hidden = true;
+		kendo.drawing.pdf.saveAs(group, "Resume_"+name+".pdf");
+	});
+}

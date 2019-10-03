@@ -1,43 +1,58 @@
 <!DOCTYPE html>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <html>
 <head>
-<title>Debi Prasad Pradhan - Curriculum Vitae</title>
+<title>${cvInfo.fullName} - Curriculum Vitae</title>
 
 <meta name="viewport" content="width=device-width" />
 <meta name="description" content="The Curriculum Vitae of Joe Bloggs." />
 <meta charset="UTF-8">
 
 <link type="text/css" rel="stylesheet" href="css/final_cv.css">
+<script src="https://kendo.cdn.telerik.com/2017.2.621/js/jquery.min.js"></script>
+	<script src="https://kendo.cdn.telerik.com/2017.2.621/js/jszip.min.js"></script>
+	<script
+	src="https://kendo.cdn.telerik.com/2017.2.621/js/kendo.all.min.js"></script>
 <link
 	href='http://fonts.googleapis.com/css?family=Rokkitt:400,700|Lato:400,300'
 	rel='stylesheet' type='text/css'>
 	
  <title></title>
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <!-- <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script> -->
 </head>
 <body id="top">
 	<div id="action-content" class="action-content">
-	  <form action="${pageContext.request.contextPath}/downloadPDF" method="post">
-		<button type="submit" class="button-decotation" id="downloadPDF" download>Download PDF</button>
-	  </form>	
+	  <%-- <form action="${pageContext.request.contextPath}/downloadPDF" method="post"> --%>
+		<button type="submit" class="button-decotation" id="downloadPDF" onclick="ExportPdf('${cvInfo.fullName}')">Download PDF</button>
+	  <!-- </form> -->	
 	</div>
 	<div id="cv" class="instaFade">
 		<div class="mainDetails">
 			<div id="name">
-				<h1 class="quickFade delayTwo">Debi Prasad Pradhan</h1>
+				<h1 class="quickFade delayTwo">${cvInfo.fullName}</h1>
 				<h2 class="quickFade delayThree">
-					100 Feet Road, Madhapur, <br>Hyderabad
+					${cvInfo.address1}, <br>${cvInfo.address2}
 				</h2>
 			</div>
 
 			<div id="contactDetails" class="quickFade delayFour">
 				<ul>
 					<li><b class="sub-heading-font">E-mail:</b> <a
-						href="mailto:debilipu89@gmail.com" target="_blank">debilipu89@gmail.com</a></li>
-					<li><b class="sub-heading-font">Website:</b> <a
-						href="http://www.bloggs.com">www.bloggs.com</a><br> <a
-						href="http://www.abcdefgh.com">www.abcdefgh.com</a></li>
-					<li><b class="sub-heading-font">Mob:</b> (+91)-9985393129<br>(+91)-7337491586</li>
+						href="mailto:${cvInfo.email}" target="_blank">${cvInfo.email}</a></li>
+					<li><b class="sub-heading-font">Website:</b> 
+						<c:forEach var="website" items="${cvInfo.websites}">
+               			<c:if test="${not empty website}">
+               				<a href="${website}" target="_blank" class="anchor_decoration">${website}</a><br/>
+               			</c:if>
+            		  </c:forEach>
+					</li>
+					<li><b class="sub-heading-font">Mob:</b> 
+						<c:forEach var="phone" items="${cvInfo.phoneNos}">
+             		  		<c:if test="${not empty phone}">
+              			 		${phone}<br/>
+                	  	</c:if>
+            		</c:forEach> 
 				</ul>
 			</div>
 			<div class="clear"></div>
@@ -52,20 +67,9 @@
 
 					<div class="sectionContent">
 						<p>
-							4.5 years of IT Industry experience in developing software
-							product, Java enterprise applications Including design and
-							trouble shooting of applications, conducting gap analysis
-							including validation of needs in coordination with onsite and
-							offshore teams.<br> • Completing product development as per
-							requirement, schedules and activities; contributing team
-							meetings, handling trouble shooting, development & production
-							issues across multiple environment.<br> • Monitoring project
-							progress and outstanding issues and ensuring the quality &
-							timelines of the deliverables; preparing High Level Design
-							Document, Detail Design Specification, weekly dashboard.<br>
-							• Working with onsite team to track status & issues in offshore
-							development mode; conducting reviews of codes & test cases
-							analyzing changes requests/enhancements.
+							<c:forEach var="summary" items="${cvInfo.profileSummaries}">
+               				# ${summary}<br/>
+            				</c:forEach>
 						</p>
 					</div>
 				</article>
@@ -79,32 +83,24 @@
 				</div>
 
 				<div class="sectionContent">
-					<article>
-						<h2>Job Title at Company</h2>
-						<p class="subDetails">April 2011 - Present</p>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-							Donec ultricies massa et erat luctus hendrerit. Curabitur non
-							consequat enim. Vestibulum bibendum mattis dignissim. Proin id
-							sapien quis libero interdum porttitor.</p>
-					</article>
-
-					<article>
-						<h2>Job Title at Company</h2>
-						<p class="subDetails">Janruary 2007 - March 2011</p>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-							Donec ultricies massa et erat luctus hendrerit. Curabitur non
-							consequat enim. Vestibulum bibendum mattis dignissim. Proin id
-							sapien quis libero interdum porttitor.</p>
-					</article>
-
-					<article>
-						<h2>Job Title at Company</h2>
-						<p class="subDetails">October 2004 - December 2006</p>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-							Donec ultricies massa et erat luctus hendrerit. Curabitur non
-							consequat enim. Vestibulum bibendum mattis dignissim. Proin id
-							sapien quis libero interdum porttitor.</p>
-					</article>
+					<c:forEach var="employement" items="${cvInfo.employements}">
+						<article>
+							<h2>${employement.designation} at ${employement.organisation}</h2>
+							<p class="subDetails">
+								<c:if test="${employement.currentCompany}">
+           				 			(${employement.monthWorkingFrom} ${employement.yearWorkingFrom} - Present)
+           				 		</c:if>
+           				  		<c:if test="${!employement.currentCompany}">
+           				 			(${employement.monthWorkingFrom} ${employement.yearWorkingFrom} - ${employement.monthWorkingTill} ${employement.yearWorkingTill})
+           				 		</c:if>
+							</p>
+							<p>
+							  <c:forEach var="desc" items="${employement.descriptions}">
+           				 	 	# ${desc}.<br>
+           				 	   </c:forEach>
+							</p>
+						</article>
+					</c:forEach>
 				</div>
 				<div class="clear"></div>
 			</section>
@@ -117,14 +113,9 @@
 
 				<div class="sectionContent">
 					<ul class="keySkills">
-						<li>A Key Skill</li>
-						<li>A Key Skill</li>
-						<li>A Key Skill</li>
-						<li>A Key Skill</li>
-						<li>A Key Skill</li>
-						<li>A Key Skill</li>
-						<li>A Key Skill</li>
-						<li>A Key Skill</li>
+					   <c:forEach var="skill" items="${cvInfo.skills}">
+						<li>${skill}</li>
+					   </c:forEach>	
 					</ul>
 				</div>
 				<div class="clear"></div>
@@ -137,28 +128,39 @@
 				</div>
 
 				<div class="sectionContent">
-					<article>
-						<h2>College/University</h2>
-						<p class="subDetails">Qualification</p>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-							Donec ultricies massa et erat luctus hendrerit. Curabitur non
-							consequat enim.</p>
-					</article>
-
-					<article>
-						<h2>College/University</h2>
-						<p class="subDetails">Qualification</p>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-							Donec ultricies massa et erat luctus hendrerit. Curabitur non
-							consequat enim.</p>
-					</article>
+					<c:forEach var="education" items="${cvInfo.educations}">
+						<article>
+							<h2>${education.institute}</h2>
+							<c:if test="${education.gpa}">
+									<p class="subDetails">${education.education} (${education.specialization}) with ${education.percentage} CGPA in the year ${education.passoutYear}</p>
+								</c:if>
+								<c:if test="${!education.gpa}">
+									<p class="subDetails">${education.education} (${education.specialization}) with ${education.percentage}% in the year ${education.passoutYear}</p>
+							</c:if>
+						</article>
+					</c:forEach>
 				</div>
 				<div class="clear"></div>
 			</section>
+			
+			<c:forEach items="${cvInfo.newSummary}" var="summary">
+			 	<section>
+			 		<div class="sectionTitle">
+						<h1>${summary.key}</h1>
+					</div>
+					<div class="sectionContent">
+					<article>
+						<p class="subDetails">${summary.value}</p>
+					</article>
+				</div>
+			 	</section>
+			 </c:forEach>
 
 		</div>
 	</div>
 
+	
+	<%@include file="pdf_template_1.jsp"%>
 	<script type="text/javascript">
 		var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl."
 				: "http://www.");

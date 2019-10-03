@@ -26,6 +26,10 @@
 
   <!-- Custom styles for this template -->
   <link href="css/resume.min.css" rel="stylesheet">
+  <script src="https://kendo.cdn.telerik.com/2017.2.621/js/jquery.min.js"></script>
+	<script src="https://kendo.cdn.telerik.com/2017.2.621/js/jszip.min.js"></script>
+	<script
+	src="https://kendo.cdn.telerik.com/2017.2.621/js/kendo.all.min.js"></script>
 
 </head>
 
@@ -70,7 +74,7 @@
        		</li>
 		</c:forEach>
 		<li class="nav-item">
-          <a class="nav-link js-scroll-trigger" href="${pageContext.request.contextPath}/downloadPublishedCV">Download</a>
+          <a class="nav-link js-scroll-trigger" href="#" onclick="ExportPdf('${cvInfo.fullName}')">Download</a>
         </li>
       </ul>
     </div>
@@ -81,7 +85,7 @@
       <div class="w-100">
         <h1 class="mb-0">${cvInfo.fullName}
         </h1>
-        <div class="subheading mb-5">
+        <div class="subheading">
         	<c:if test="${not empty cvInfo.address1}">
         	${cvInfo.address1},
         	</c:if>
@@ -111,11 +115,13 @@
          		Email: <a href="mailto:${cvInfo.email}" class="anchor_decoration">${cvInfo.email}</a>
          	</c:if>
         </div>
-        <p class="lead mb-5 text-decoration">
-        	<c:forEach var="summary" items="${cvInfo.profileSummaries}">
-               ${summary}.<br>
-            </c:forEach>
-        </p>
+        <div>
+        	<ul style="list-style-type: disc;margin-top: 15px;margin-bottom: 25px;">
+				<c:forEach var="summary" items="${cvInfo.profileSummaries}">
+               		<li>${summary}</li>
+            	</c:forEach>
+			</ul>
+        </div>
         <div class="social-icons">
         <c:if test="${not empty cvInfo.linkedin}">
           <a href="https://${cvInfo.linkedin}" target="_blank">
@@ -173,7 +179,6 @@
         		 </div>
          </c:forEach>      
       </div>
-
     </section>
 
     <hr class="m-0">
@@ -210,7 +215,7 @@
             <h5 class="h5-md-12">Roles & Responsibilities</h5>
             <p class="text-decoration">
               <c:forEach var="respnb" items="${project.responsibilities}">
-              	${respnb}.<br>
+              	# ${respnb}.<br>
               </c:forEach>
 			</p>
           </div>
@@ -262,6 +267,9 @@
 	</c:forEach>
 
   </div>
+  
+  <%@include file="pdf_template.jsp"%>
+  
   <!-- Bootstrap core JavaScript -->
   <script src="vendor/jquery/jquery.min.js"></script>
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

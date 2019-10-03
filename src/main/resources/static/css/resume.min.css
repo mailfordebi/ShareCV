@@ -18,7 +18,7 @@ h1, h2, h3, h4, h5, h6 {
 		'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif,
 		'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
 		'Noto Color Emoji'; */
-	font-family:sans-serif;	
+	font-family: sans-serif;
 	font-weight: 700;
 	text-transform: uppercase;
 	color: #343a40
@@ -42,7 +42,7 @@ p.lead {
 	font-weight: 400
 }
 
-.anchor_decoration{
+.anchor_decoration {
 	text-decoration: none !important;
 }
 
@@ -148,6 +148,7 @@ section.resume-section .resume-item .resume-date {
 @media ( min-width :768px) {
 	section.resume-section {
 		/* min-height: 58vh */
+		
 	}
 	section.resume-section .resume-item .resume-date {
 		min-width: 10rem
@@ -179,39 +180,45 @@ a:active, a:focus, a:hover {
 	color: #824027
 }
 
-.skill-chip{
+.skill-chip {
 	background: #eee;
-    padding: 11px 20px;
-    border-radius: 4px;
-    margin: 10px 10px 0 0;
-    color: #666;
-    max-width: 515px;
-    display: inline-block;
+	padding: 11px 20px;
+	border-radius: 4px;
+	margin: 10px 10px 0 0;
+	color: #666;
+	max-width: 515px;
+	display: inline-block;
 }
 
-.h5-md-12{
+.h5-md-12 {
 	text-transform: none !important;
 	font-size: 17px;
 }
 
-.env-details{
+.env-details {
 	font-size: 16px;
-    text-transform: none !important;
+	text-transform: none !important;
 }
 
-.modal-footer-div{
+.modal-footer-div {
 	height: 50px;
 }
 
-.save-data{
+.save-data {
 	width: 83px;
-    font-size: 20px;
-    height: 40px;
-    margin-top: 6px;
-    padding-top: 3px;
+	font-size: 20px;
+	height: 40px;
+	margin-top: 6px;
+	padding-top: 3px;
 }
 
-.text-decoration{
+.text-decoration {
 	text-align: justify;
 	max-width: 870px;
+}
+
+.summary-details {
+	list-style-type: disc;
+    margin-top: 15px;
+    margin-bottom: 25px;
 }
