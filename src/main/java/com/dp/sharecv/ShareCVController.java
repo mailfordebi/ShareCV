@@ -62,6 +62,20 @@ public class ShareCVController {
 		modelAndView.setViewName("resume_builder");
 		return modelAndView;
 	}
+	
+	@RequestMapping("/cv")
+	public ModelAndView cv() {
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("cv");
+		return modelAndView;
+	}
+	
+	@RequestMapping("/biodata")
+	public ModelAndView biodata() {
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("biodata");
+		return modelAndView;
+	}
 
 	@RequestMapping("/login")
 	public ModelAndView login(@RequestParam("page") String page) {

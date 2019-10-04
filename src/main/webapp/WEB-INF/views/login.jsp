@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css">
 <link rel="stylesheet" href="css/login.css">
 <link href="css/style.css" rel="stylesheet">
-<title>CVBUILDER -Login/Register</title>
+<title>ShareCV -Login/Register</title>
 <!-- Favicons -->
   <link href="img/favicon.png" rel="icon">
   <link href="img/apple-touch-icon.png" rel="apple-touch-icon">
@@ -17,7 +17,7 @@
 		<div class="container">
 			<div id="logo" class="pull-left">
 				<h1>
-					<a href="${pageContext.request.contextPath}/index" class="scrollto">CVBUILDER</a>
+					<a href="${pageContext.request.contextPath}/index" class="scrollto">SHARECV</a>
 				</h1>
 			</div>
 		</div>
@@ -115,7 +115,7 @@
       <div class="row">
         <div class="col-lg-6 text-lg-left text-center">
           <div class="copyright">
-            &copy; Copyright <strong>CVMaker</strong>. All Rights Reserved
+            &copy; Copyright <strong>ShareCV</strong>. All Rights Reserved
           </div>
         </div>
       </div>

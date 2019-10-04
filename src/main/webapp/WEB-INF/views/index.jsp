@@ -4,7 +4,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>CVMaker Create, Build, Publish Online</title>
+  <title>ShareCV - Create, Build, Publish Online</title>
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
   <meta content="" name="keywords">
   <meta content="" name="description">
@@ -36,7 +36,7 @@
     <div class="container">
 
       <div id="logo" class="pull-left">
-        <h1><a href="${pageContext.request.contextPath}/index" class="scrollto">CVBUILDER</a></h1>
+        <h1><a href="${pageContext.request.contextPath}/index" class="scrollto">SHARECV</a></h1>
       </div>
 
       <nav id="nav-menu-container">
@@ -74,7 +74,7 @@
   <section id="intro">
 
     <div class="intro-text">
-      <h2>Welcome to CVMaker</h2>
+      <h2>Welcome to ShareCV</h2>
       <p>Create, Download, Publish, Share and Host Your CV Free</p>
       <a href="${pageContext.request.contextPath}/resume" class="btn-get-started scrollto">Get Started</a>
     </div>
@@ -123,24 +123,24 @@
             <div class="row">
 
               <div class="col-lg-6 col-md-6 box wow fadeInRight">
-                <div class="icon"><i class="ion-ios-speedometer-outline"></i></div>
-                <h4 class="title"><a href="">Lorem Ipsum</a></h4>
-                <p class="description">Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident clarida perendo.</p>
+                <div class="icon"><i class="ion-android-create"></i></div>
+                <h4 class="title"><a href="">Build Your Resume</a></h4>
+                <p class="description">Build your resume/CV/Biodata with in 5 minuties.</p>
               </div>
               <div class="col-lg-6 col-md-6 box wow fadeInRight" data-wow-delay="0.1s">
-                <div class="icon"><i class="ion-ios-flask-outline"></i></div>
-                <h4 class="title"><a href="">Dolor Sitema</a></h4>
-                <p class="description">Minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat tarad limino ata noble dynala mark.</p>
+                <div class="icon"><i class="ion-ios-download"></i></div>
+                <h4 class="title"><a href="">Download Resume</a></h4>
+                <p class="description">Download your resume. No Watermarks. No advertisements. No tricks. No games.</p>
               </div>
               <div class="col-lg-6 col-md-6 box wow fadeInRight" data-wow-delay="0.2s">
-                <div class="icon"><i class="ion-social-buffer-outline"></i></div>
-                <h4 class="title"><a href="">Sed ut perspiciatis</a></h4>
-                <p class="description">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur teleca starter sinode park ledo.</p>
+                <div class="icon"><i class="ion-ios-cloud"></i></div>
+                <h4 class="title"><a href="">Publish to Cloud</a></h4>
+                <p class="description">Publish your resume to cloud for future use.</p>
               </div>
               <div class="col-lg-6 col-md-6 box wow fadeInRight" data-wow-delay="0.3s">
-                <div class="icon"><i class="ion-ios-analytics-outline"></i></div>
-                <h4 class="title"><a href="">Magni Dolores</a></h4>
-                <p class="description">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum dinoun trade capsule.</p>
+                <div class="icon"><i class="ion-android-share-alt"></i></div>
+                <h4 class="title"><a href="">Share Profile with Others</a></h4>
+                <p class="description">Share your resume with others with one click.</p>
               </div>
             </div>
 
@@ -151,56 +151,6 @@
       </div>
 
     </section><!-- #features -->
-
-    <!--==========================
-      More Features Section
-    ============================-->
-    <section id="more-features" class="section-bg">
-      <div class="container">
-
-        <div class="section-header">
-          <h3 class="section-title">More Features</h3>
-          <span class="section-divider"></span>
-          <p class="section-description">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque</p>
-        </div>
-
-        <div class="row">
-
-          <div class="col-lg-6">
-            <div class="box wow fadeInLeft">
-              <div class="icon"><i class="ion-ios-stopwatch-outline"></i></div>
-              <h4 class="title"><a href="">Lorem Ipsum</a></h4>
-              <p class="description">Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident etiro rabeta lingo.</p>
-            </div>
-          </div>
-
-          <div class="col-lg-6">
-            <div class="box wow fadeInRight">
-              <div class="icon"><i class="ion-ios-bookmarks-outline"></i></div>
-              <h4 class="title"><a href="">Dolor Sitema</a></h4>
-              <p class="description">Minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat tarad limino ata nodera clas.</p>
-            </div>
-          </div>
-
-          <div class="col-lg-6">
-            <div class="box wow fadeInLeft">
-              <div class="icon"><i class="ion-ios-heart-outline"></i></div>
-              <h4 class="title"><a href="">Sed ut perspiciatis</a></h4>
-              <p class="description">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur trinige zareta lobur trade.</p>
-            </div>
-          </div>
-
-          <div class="col-lg-6">
-            <div class="box wow fadeInRight">
-              <div class="icon"><i class="ion-ios-analytics-outline"></i></div>
-              <h4 class="title"><a href="">Magni Dolores</a></h4>
-              <p class="description">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum rideta zanox satirente madera</p>
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </section><!-- #more-features -->
 
     <!--==========================
       Pricing Section
@@ -269,7 +219,7 @@
     <!--==========================
       Frequently Asked Questions Section
     ============================-->
-    <section id="faq">
+    <!-- <section id="faq">
       <div class="container">
 
         <div class="section-header">
@@ -336,7 +286,7 @@
         </ul>
 
       </div>
-    </section><!-- #faq -->
+    </section> --><!-- #faq -->
 
 
 	<section id="about" class="section-bg">
@@ -344,10 +294,6 @@
         <div class="section-header">
           <h3 class="section-title">About Us</h3>
           <span class="section-divider"></span>
-          <p class="section-description">
-            Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque<br>
-            sunt in culpa qui officia deserunt mollit anim id est laborum
-          </p>
         </div>
 
         <div class="row">
@@ -356,21 +302,18 @@
           </div>
 
           <div class="col-lg-6 content wow fadeInRight">
-            <h2>Lorem ipsum dolor sit amet, consectetur adipiscing elite storium paralate</h2>
-            <h3>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</h3>
-            <p>
+            <h2>A free resume builder (and CV format) created for the dreams and aspirations for a better job. A Bio-data as a personal profile to present to a prospective marriage partner.</h2>
+            <!-- <p>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua ullamco laboris nisi ut aliquip ex ea commodo consequat.
-            </p>
+            </p> -->
 
             <ul>
-              <li><i class="ion-android-checkmark-circle"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat.</li>
-              <li><i class="ion-android-checkmark-circle"></i> Duis aute irure dolor in reprehenderit in voluptate velit.</li>
-              <li><i class="ion-android-checkmark-circle"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate trideta storacalaperda mastiro dolore eu fugiat nulla pariatur.</li>
+              <li><i class="ion-android-checkmark-circle"></i> Build your resume/CV/Biodata with in 5 minuties.</li>
+              <li><i class="ion-android-checkmark-circle"></i> Download your resume. No Watermarks. No advertisements. No tricks. No games.</li>
+              <li><i class="ion-android-checkmark-circle"></i> Publish your profile to cloud for future use.</li>
+              <li><i class="ion-android-checkmark-circle"></i> Share your resume with others with one click.</li>
             </ul>
 
-            <p>
-              Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum Libero justo laoreet sit amet cursus sit amet dictum sit. Commodo sed egestas egestas fringilla phasellus faucibus scelerisque eleifend donec
-            </p>
           </div>
         </div>
 
@@ -386,8 +329,8 @@
 
           <div class="col-lg-4 col-md-4">
             <div class="contact-about">
-              <h3>CVMAKER</h3>
-              <p>Cras fermentum odio eu feugiat. Justo eget magna fermentum iaculis eu non diam phasellus. Scelerisque felis imperdiet proin fermentum leo. Amet volutpat consequat mauris nunc congue.</p>
+              <h3>SHARECV</h3>
+              <p>A free resume builder (and CV format) created for the dreams and aspirations for a better job. A Bio-data as a personal profile to present to a prospective marriage partner.</p>
               <div class="social-links">
                 <a href="#" class="twitter"><i class="fa fa-twitter"></i></a>
                 <a href="#" class="facebook"><i class="fa fa-facebook"></i></a>
@@ -402,17 +345,17 @@
             <div class="info">
               <div>
                 <i class="ion-ios-location-outline"></i>
-                <p>A108 Adam Street<br>New York, NY 535022</p>
+                <p>Hyderabad<br>India, IN 500081</p>
               </div>
 
               <div>
                 <i class="ion-ios-email-outline"></i>
-                <p>info@example.com</p>
+                <p>sharecv@gmail.com</p>
               </div>
 
               <div>
                 <i class="ion-ios-telephone-outline"></i>
-                <p>+1 5589 55488 55s</p>
+                <p>+91-7337 052 946</p>
               </div>
 
             </div>
@@ -461,7 +404,7 @@
       <div class="row">
         <div class="col-lg-6 text-lg-left text-center">
           <div class="copyright">
-            &copy; Copyright <strong>endmerge</strong>. All Rights Reserved
+            &copy; Copyright <strong>ShareCV</strong>. All Rights Reserved
           </div>
         </div>
       </div>

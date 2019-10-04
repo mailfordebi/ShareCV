@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>CVMaker Create, Build, Publish Online</title>
+  <title>ShareCV - Create, Build, Publish Online</title>
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
   <meta content="" name="keywords">
   <meta content="" name="description">
@@ -57,7 +57,7 @@
 
   <section id="intro" class="intro-section">
      <div class="product-screens">
-		CV
+		CV Builder Coming Soon.
     </div>  
   </section>
   
@@ -66,7 +66,7 @@
       <div class="row">
         <div class="col-lg-6 text-lg-left text-center">
           <div class="copyright">
-            &copy; Copyright <strong>CVMaker</strong>. All Rights Reserved
+            &copy; Copyright <strong>ShareCV</strong>. All Rights Reserved
           </div>
         </div>
       </div>
