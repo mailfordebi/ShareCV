@@ -66,14 +66,21 @@ public class ShareCVController {
 	@RequestMapping("/cv")
 	public ModelAndView cv() {
 		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("cv");
+		modelAndView.setViewName("cvbuilder");
 		return modelAndView;
 	}
 	
 	@RequestMapping("/biodata")
 	public ModelAndView biodata() {
 		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("biodata");
+		modelAndView.setViewName("biodatabuilder");
+		return modelAndView;
+	}
+	
+	@RequestMapping("/coverletter")
+	public ModelAndView coverletter() {
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("coverletter_builder");
 		return modelAndView;
 	}
 

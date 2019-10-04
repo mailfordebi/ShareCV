@@ -42,9 +42,9 @@
       <nav id="nav-menu-container">
         <ul class="nav-menu">
           <li class="menu-active"><a href="#intro">Resume</a></li>
-          <li><a href="biodatabuilder.html">Biodata</a></li>
-          <li><a href="cvbuilder.html">CV</a></li>
-          <li><a href="coverletter_builder.html">Cover Letter</a></li>
+          <li><a href="${pageContext.request.contextPath}/biodata">Biodata</a></li>
+          <li><a href="${pageContext.request.contextPath}/cv">CV</a></li>
+          <li><a href="${pageContext.request.contextPath}/coverletter">Cover Letter</a></li>
           <li><a href="#">Upgrade to PRO</a></li>
           <li class="menu-has-children"><a href="#">Language</a>
             <ul>
