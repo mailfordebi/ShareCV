@@ -47,7 +47,7 @@
           <li class="menu-has-children"><a href="#">Language</a>
             <ul>
               <li><a href="#">English</a></li>
-              <li><a href="#">Dutch</a></li>
+              <!-- <li><a href="#">Dutch</a></li> -->
             </ul>
           </li>
            <li><a href="#about">About Us</a></li>
@@ -350,7 +350,7 @@
 
               <div>
                 <i class="ion-ios-email-outline"></i>
-                <p>sharecv@gmail.com</p>
+                <p>sharecv4@gmail.com</p>
               </div>
 
               <div>

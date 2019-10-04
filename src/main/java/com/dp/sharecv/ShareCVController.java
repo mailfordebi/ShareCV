@@ -4,12 +4,20 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.io.PrintWriter;
 import java.io.StringReader;
 import java.nio.file.Files;
 import java.util.Base64;
+import java.util.Date;
 import java.util.List;
+import java.util.Properties;
 import java.util.StringTokenizer;
 
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.Session;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -41,6 +49,7 @@ import com.itextpdf.tool.xml.pipeline.css.CssResolverPipeline;
 import com.itextpdf.tool.xml.pipeline.end.PdfWriterPipeline;
 import com.itextpdf.tool.xml.pipeline.html.HtmlPipeline;
 import com.itextpdf.tool.xml.pipeline.html.HtmlPipelineContext;
+import com.sun.mail.smtp.SMTPTransport;
 
 @Controller
 @SessionAttributes({ "cvInfo", "isLoggedIn", "user", "username" })
@@ -62,21 +71,21 @@ public class ShareCVController {
 		modelAndView.setViewName("resume_builder");
 		return modelAndView;
 	}
-	
+
 	@RequestMapping("/cv")
 	public ModelAndView cv() {
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("cvbuilder");
 		return modelAndView;
 	}
-	
+
 	@RequestMapping("/biodata")
 	public ModelAndView biodata() {
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("biodatabuilder");
 		return modelAndView;
 	}
-	
+
 	@RequestMapping("/coverletter")
 	public ModelAndView coverletter() {
 		ModelAndView modelAndView = new ModelAndView();
@@ -109,6 +118,66 @@ public class ShareCVController {
 		request.getSession().setAttribute("cvInfo", cv);
 		modelAndView.setViewName("publish_cv");
 		return modelAndView;
+	}
+
+	@RequestMapping(value = "/contactform", method = RequestMethod.POST)
+	public void contactform(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		String name = request.getParameter("name");
+		String email = request.getParameter("email");
+		String subject = request.getParameter("subject");
+		String message = request.getParameter("message");
+
+		Properties prop = System.getProperties();
+		prop.put("mail.smtp.host", "smtp.gmail.com");
+		prop.put("mail.smtp.auth", true);
+		prop.put("mail.smtp.port", "465");
+		prop.put("mail.smtp.ssl.enable", true);
+		prop.put("mail.smtp.user", "sharecv4@gmail.com");
+		prop.put("mail.smtp.password", "Deb1pr@s@d");
+		prop.put("mail.smtp.starttls.enable", true);
+		prop.put("mail.smtp.starttls.required", true);
+		prop.put("mail.smtp.startssl.enable", true);
+		prop.put("mail.smtp.startssl.required", true);
+
+		Session session = Session.getInstance(prop, null);
+		Message msg = new MimeMessage(session);
+		String tmsg;
+		try {
+			msg.setFrom(new InternetAddress(email));
+			msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse("sharecv4@gmail.com", false));
+			msg.setSubject(email + " - " + subject);
+			msg.setText("Name:" + name + "\nMessage:" + message);
+			msg.setSentDate(new Date());
+			SMTPTransport t = (SMTPTransport) session.getTransport("smtp");
+			t.connect("smtp.gmail.com", "sharecv4@gmail.com", "Deb1pr@s@d");
+			t.sendMessage(msg, msg.getAllRecipients());
+			System.out.println("Response: " + t.getLastServerResponse());
+			t.close();
+			tmsg = "OK";
+
+			// Auto Reply
+			msg = new MimeMessage(session);
+			msg.setFrom(new InternetAddress("sharecv4@gmail.com"));
+			msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(email, false));
+			msg.setSubject("Thank you for your mail");
+			msg.setText("Hi " + name+"," + "\nThank you for your mail. We will get back to you soon.\nThank You");
+			msg.setSentDate(new Date());
+			SMTPTransport t1 = (SMTPTransport) session.getTransport("smtp");
+			t1.connect("smtp.gmail.com", "sharecv4@gmail.com", "Deb1pr@s@d");
+			t1.sendMessage(msg, msg.getAllRecipients());
+			System.out.println("Response: " + t.getLastServerResponse());
+			t1.close();
+		} catch (MessagingException e) {
+			tmsg = e.toString();
+			e.printStackTrace();
+		}
+
+		response.setContentType("text/plain");
+		response.setContentLength(tmsg.length());
+		PrintWriter out = response.getWriter();
+		out.println(tmsg);
+		out.close();
+		out.flush();
 	}
 
 	@RequestMapping(value = "/resetpassword", method = RequestMethod.POST)
