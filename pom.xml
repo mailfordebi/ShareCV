@@ -109,7 +109,7 @@
 			<plugin>
 				<artifactId>maven-war-plugin</artifactId>
 				<configuration>
-					<warName>BlogInfo</warName>
+					<warName>sharecv</warName>
 				</configuration>
 			</plugin>
 		</plugins>

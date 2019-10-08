@@ -189,7 +189,7 @@ td, th {
 </style>
 </head>
 <body>
-	<div id="cv123" class="instaFade1">
+	<div id="cv123" class="instaFade1" hidden="true">
 		<div class="mainDetails1">
 			<div id="name1">
 				<h1 class="quickFade1 delayTwo1">${cvInfo.fullName}</h1>
