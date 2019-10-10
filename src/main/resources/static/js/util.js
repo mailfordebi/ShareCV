@@ -307,7 +307,8 @@ function showDataSave(){
 function ExportPdf(name) {
 	document.getElementById('cv123').hidden = false;
 	kendo.drawing.drawDOM("#cv123", {
-		forcePageBreak: ".page-break", // add this class to each element where you want manual page break
+		forcePageBreak: ".page-break", // add this class to each element where
+										// you want manual page break
 		paperSize : "A4",
 		margin : {
 			top : "1cm",
@@ -324,3 +325,30 @@ function ExportPdf(name) {
 		kendo.drawing.pdf.saveAs(group, "Resume_"+name+".pdf");
 	});
 }
+
+
+function validateForm() {
+	  var name = document.forms["form_submit_resume_details"]["fullName"].value;
+	  if (name == "") {
+	    alert("Full Name can't be empty.");
+	    return false;
+	  }
+	  
+	  var email = document.forms["form_submit_resume_details"]["email"].value;
+	  if (email == "") {
+	    alert("Email Name can't be empty.");
+	    return false;
+	  }
+	  
+	  var phone = document.forms["form_submit_resume_details"]["phone"].value;
+	  if (phone == "") {
+	    alert("Please provide atleast one phone number.");
+	    return false;
+	  }
+	  
+	 /* var address1 = document.forms["form_submit_resume_details"]["address1"].value;
+	  if (address1 == "") {
+	    alert("Please provide atleast one adress.");
+	    return false;
+	  }*/
+	}

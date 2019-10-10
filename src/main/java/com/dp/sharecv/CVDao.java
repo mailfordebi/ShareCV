@@ -49,7 +49,7 @@ public class CVDao {
 		User user = (User) mongoOperations.findOne(query, User.class);
 		return user;
 	}
-
+	
 	public CVInfo getCVDetails(String email) {
 		Query query = new Query();
 		query.addCriteria(Criteria.where("email").is(email));

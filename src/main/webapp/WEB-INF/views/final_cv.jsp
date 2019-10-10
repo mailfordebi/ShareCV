@@ -24,6 +24,7 @@
 <body id="top">
 	<div id="action-content" class="action-content">
 	  <%-- <form action="${pageContext.request.contextPath}/downloadPDF" method="post"> --%>
+	    <a class="button-decotation back-a" id="back" href="${pageContext.request.contextPath}/backToEdit">Edit</a>
 		<button type="submit" class="button-decotation" id="downloadPDF" onclick="ExportPdf('${cvInfo.fullName}')">Download PDF</button>
 	  <!-- </form> -->	
 	</div>

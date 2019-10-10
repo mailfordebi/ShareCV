@@ -219,6 +219,10 @@ a:active, a:focus, a:hover {
 
 .summary-details {
 	list-style-type: disc;
-    margin-top: 15px;
-    margin-bottom: 25px;
+	margin-top: 15px;
+	margin-bottom: 25px;
+}
+
+.edit-link {
+	color: #9c3030 !important;
 }
