@@ -36,10 +36,15 @@
 <body id="page-top">
 
   <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top" id="sideNav">
-    <a class="navbar-brand js-scroll-trigger" href="#page-top">
+    <a class="navbar-brand js-scroll-trigger" href="${pageContext.request.contextPath}/index">
       <span class="d-block d-lg-none">${cvInfo.fullName}</span>
       <span class="d-none d-lg-block">
+      	<c:if test="${not empty cvInfo.profileImage}">
         <img class="img-fluid img-profile rounded-circle mx-auto mb-2" src="data:image/jpeg;base64,${cvInfo.profileImage}" alt="Red dot">
+        </c:if>
+        <c:if test="${empty cvInfo.profileImage}">
+        <img class="img-fluid img-profile rounded-circle mx-auto mb-2" src="img/favicon.png" alt="Red dot">
+        </c:if>
       </span>
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -49,7 +54,7 @@
       <ul class="navbar-nav">
       	<c:if test="${sessionScope.isLoggedIn}">
      		<li class="nav-item">
-         	 <a class="nav-link js-scroll-trigger" href="${pageContext.request.contextPath}/index">My Home</a>
+         	 <a class="nav-link js-scroll-trigger" href="${pageContext.request.contextPath}/index">Home</a>
        		 </li>
         </c:if>
         <li class="nav-item">
@@ -73,13 +78,24 @@
           		<a class="nav-link js-scroll-trigger" href="#${summary.key}">${summary.key}</a>
        		</li>
 		</c:forEach>
+		<c:if test="${not empty cvInfo.email}">
 		<li class="nav-item">
           <a class="nav-link js-scroll-trigger" href="#" onclick="ExportPdf('${cvInfo.fullName}')">Download</a>
         </li>
+        </c:if>
+        <c:if test="${sessionScope.isLoggedIn and cvInfo.email_id eq user.email}">
+        <li class="nav-item">
+          <a class="nav-link js-scroll-trigger edit-link" href="${pageContext.request.contextPath}/editProfile">Edit</a>
+        </li>
+        </c:if>
       </ul>
     </div>
   </nav>
 
+  <c:if test="${empty cvInfo.email}">
+  	<h2>This profile is not available</h2>
+  </c:if>
+  <c:if test="${not empty cvInfo.email}">
   <div class="container-fluid p-0">
     <section class="resume-section p-3 p-lg-5 d-flex align-items-center" id="about">
       <div class="w-100">
@@ -92,8 +108,8 @@
         	<c:if test="${not empty cvInfo.address2}">
         	${cvInfo.address2},
         	</c:if>
-        	<br>
         	<c:if test="${not empty cvInfo.phoneNos}">
+        	<br>
         	Phone: 
         	<c:forEach var="phone" items="${cvInfo.phoneNos}">
                <c:if test="${not empty phone}">
@@ -101,8 +117,8 @@
                 </c:if>
             </c:forEach>
             </c:if>
-            <br>
             <c:if test="${not empty cvInfo.websites}">
+            <br>
             Websites: 
             <c:forEach var="website" items="${cvInfo.websites}">
                <c:if test="${not empty website}">
@@ -110,8 +126,8 @@
                </c:if>
             </c:forEach>
             </c:if>
-            <br>
-          	<c:if test="${not empty cvInfo.email}">  
+          	<c:if test="${not empty cvInfo.email}">
+          	<br>  
          		Email: <a href="mailto:${cvInfo.email}" class="anchor_decoration">${cvInfo.email}</a>
          	</c:if>
         </div>
@@ -267,6 +283,7 @@
 	</c:forEach>
 
   </div>
+  </c:if>
   
   <%@include file="pdf_template.jsp"%>
   

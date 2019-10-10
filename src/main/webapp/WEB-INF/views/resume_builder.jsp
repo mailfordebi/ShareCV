@@ -68,7 +68,7 @@
     </div>
   </header>
 
- <form action="${pageContext.request.contextPath}/resume_action_submit" id="form_submit_resume_details" name="form_submit_resume_details" method="post" enctype="multipart/form-data"> 
+ <form action="${pageContext.request.contextPath}/resume_action_submit" id="form_submit_resume_details" name="form_submit_resume_details" method="post" enctype="multipart/form-data" onsubmit="return validateForm()"> 
   <section id="intro" class="intro-section">
   <div id="accordion" class="resume-builder-section">
   <section class="container12" id="lisContainer12">
@@ -88,15 +88,15 @@
     <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
       <div class="card-body">
         <div class="form-group basic-info">
-    		<label for="fullName">Full Name</label>
+    		<label for="fullName">Full Name*</label>
    			 <input type="text" class="form-control" id="fullName" name="fullName" placeholder="Enter Name">
   		</div>
   		<div class="form-group basic-info">
-    		<label for="email">Email</label>
+    		<label for="email">Email*</label>
     		<input type="email" class="form-control" id="email" name="email" placeholder="Email">
   		</div>
   		<div class="form-group basic-info">
-    		<label for="phone">Phone Numbers</label>
+    		<label for="phone">Phone Numbers*</label>
     		<input type="text" class="form-control" id="phone" name="phone">
     		<small id="phoneHelp" class="form-text text-muted">If you have more than one number, separate with commas.</small>
   		</div>
