@@ -109,6 +109,22 @@ public class ShareCVController {
 		return modelAndView;
 	}
 
+	// TODO Need to add all the pre defined data
+	@RequestMapping("/editProfile")
+	public ModelAndView editProfile() {
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("resume_builder");
+		return modelAndView;
+	}
+
+	// TODO Need to add all the pre defined data
+	@RequestMapping("/backToEdit")
+	public ModelAndView backToEdit() {
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("resume_builder");
+		return modelAndView;
+	}
+
 	@RequestMapping(value = "/{email}", method = RequestMethod.GET)
 	public ModelAndView getProfile(@PathVariable("email") String email, HttpServletRequest request) {
 		ModelAndView modelAndView = new ModelAndView();
@@ -160,7 +176,7 @@ public class ShareCVController {
 			msg.setFrom(new InternetAddress("sharecv4@gmail.com"));
 			msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(email, false));
 			msg.setSubject("Thank you for your mail");
-			msg.setText("Hi " + name+"," + "\nThank you for your mail. We will get back to you soon.\nThank You");
+			msg.setText("Hi " + name + "," + "\nThank you for your mail. We will get back to you soon.\nThank You");
 			msg.setSentDate(new Date());
 			SMTPTransport t1 = (SMTPTransport) session.getTransport("smtp");
 			t1.connect("smtp.gmail.com", "sharecv4@gmail.com", "Deb1pr@s@d");
