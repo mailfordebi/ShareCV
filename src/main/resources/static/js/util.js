@@ -1,4 +1,6 @@
 var skillSet = new Map();
+var incrementByOne=0;
+var empDetails = new Map();
 function addValue(obj) {
 	obj.addEventListener("keyup", function(event) {
 		if ((event.keyCode === 186 || event.keyCode===13)  && obj.value != '') {
@@ -6,7 +8,8 @@ function addValue(obj) {
 			if(enterVal.charAt(enterVal.length - 1)===';'){
 				enterVal=enterVal.substring(0, enterVal.length - 1);
 			}
-			var id = enterVal + new Date().valueOf();
+			var id = enterVal + '_' + incrementByOne;
+			incrementByOne=incrementByOne+1;
 			skillSet.set(id, enterVal);
 			var span = document.createElement("span");
 			span.className = "label label-default skill-label";
@@ -33,18 +36,24 @@ function addValue(obj) {
 		}
 	});
 	
-	function addTextAreaValues(){
-		var textAreaSkillsSet=document.getElementById("skillSetTextArea");
-		textAreaSkillsSet.value='';
-		var get_keys = skillSet.keys(); 
-		for(var ele of get_keys) 
-		textAreaSkillsSet.value=textAreaSkillsSet.value+'>)]##[(<'+skillSet.get(ele);
-	}
-	
 	if (event.which === 13) {
 	      event.preventDefault();
 	}
 	
+}
+
+function addTextAreaValues(){
+	var textAreaSkillsSet=document.getElementById("skillSetTextArea");
+	textAreaSkillsSet.value='';
+	var get_keys = skillSet.keys(); 
+	for(var ele of get_keys) 
+	textAreaSkillsSet.value=textAreaSkillsSet.value+'>)]##[(<'+skillSet.get(ele);
+}
+
+function removeSkill(button){
+	button.parentNode.hidden = true;
+	skillSet.delete(button.parentNode.id);
+	addTextAreaValues();
 }
 
 function showTillWorking(obj){
@@ -57,7 +66,7 @@ function showTillWorking(obj){
 }
 
 function addToEmplyeeSec(){
-	var textData='';
+	var employee = new Map();
 	var form_organization=document.getElementById("form_organization");
 	var form_designation=document.getElementById("form_designation");
 	var isCurrentCompanyNo=document.getElementById("isCurrentCompanyNo");
@@ -68,46 +77,80 @@ function addToEmplyeeSec(){
 	var selectMonthWorkingTill=document.getElementById("selectMonthWorkingTill");
 	var organization_description=document.getElementById("organization_description");
 	
+	var key_id=form_organization.value+"_"+form_designation.value+"_"+selectYearWorkingFrom.value+"_"+selectMonthWorkingFrom.value;
 	var div = document.createElement("div");
-	div.className = "card-body";
+	div.className = "card-body card-body-div";
+	
+	var edit_trash = document.createElement("div");
+	edit_trash.className = "edit-trash-div";
+	
+	var edit = document.createElement("i");
+	edit.className = "fa fa-edit edit-trash-style";
+	edit.setAttribute("data-info", key_id);
+	edit.setAttribute("data-toggle", "modal");
+	edit.setAttribute("data-target", "#addEmployment");
+	/*edit.onclick = function(e) {
+		$('#addEmployment').modal('show');
+	};*/
+	edit_trash.appendChild(edit);
+	var trash = document.createElement("i");
+	trash.className = "fa fa-trash edit-trash-style";
+	trash.onclick = function() {
+		deleteEmployee(this.parentNode.parentNode.parentNode.id)
+	};
+	edit_trash.appendChild(trash);
+	
+	div.appendChild(edit_trash);
 	
 	var node = document.createTextNode(form_organization.value);
 	div.appendChild(node);
-	textData=textData+'organization:'+form_organization.value+'>)]##[(<';
+	employee.set("form_organization", form_organization.value);
 	
 	div.appendChild(document.createElement("br"));
 	node = document.createTextNode(form_designation.value);
 	div.appendChild(node);
-	textData=textData+'designation:'+form_designation.value+'>)]##[(<';
+	employee.set("form_designation", form_designation.value);
 	
 	div.appendChild(document.createElement("br"));
 	node = document.createTextNode(selectMonthWorkingFrom.value+'  '+selectYearWorkingFrom.value);
 	div.appendChild(node);
-	textData=textData+'MonthWorkingFrom:'+selectMonthWorkingFrom.value+'>)]##[(<';
-	textData=textData+'YearWorkingFrom:'+selectYearWorkingFrom.value+'>)]##[(<';
+	
+	employee.set("selectMonthWorkingFrom", selectMonthWorkingFrom.value);
+	employee.set("selectYearWorkingFrom", selectYearWorkingFrom.value);
 	
 	if(isCurrentCompanyNo.checked){
-		div.appendChild(document.createElement("br"));
-		node = document.createTextNode(selectMonthWorkingTill.value+'  '+selectYearWorkingTill.value);
+		/* div.appendChild(document.createElement("br")); */
+		node = document.createTextNode(" - "+selectMonthWorkingTill.value+'  '+selectYearWorkingTill.value);
 		div.appendChild(node);
-		textData=textData+'MonthWorkingTill:'+selectMonthWorkingTill.value+'>)]##[(<';
-		textData=textData+'YearWorkingTill:'+selectYearWorkingTill.value+'>)]##[(<';
+		
+		employee.set("selectMonthWorkingTill", selectMonthWorkingTill.value);
+		employee.set("selectYearWorkingTill", selectYearWorkingTill.value);
+		employee.set("isCurrentCompany",false);
+	}else{
+		employee.set("isCurrentCompany",true);
+		/* div.appendChild(document.createElement("br")); */
+		node = document.createTextNode(" - Present");
+		div.appendChild(node);
 	}
 	
 	div.appendChild(document.createElement("br"));
-	node = document.createTextNode(organization_description.value);
-	div.appendChild(node);
-	textData=textData+'Description:'+organization_description.value;
+	var s;
+	var desc = split(organization_description.value);
+	for(s in desc){
+		node = document.createTextNode("# "+desc[s]+".");
+		div.appendChild(node);
+		div.appendChild(document.createElement("br"));
+	}
+
+	employee.set("organization_description", organization_description.value);
+	addToTextArea(employee);
+	empDetails.set(key_id,employee);
 	
 	var div_up = document.createElement("div");
 	div_up.className = "card";
+	div_up.id=key_id;
 	div_up.appendChild(div);
 	document.getElementById("addEmploymentDIV").appendChild(div_up);
-	
-	var textAreaEmployee=document.getElementById("employeDetailsTextArea").value;
-	textAreaEmployee=textAreaEmployee+'>)]##[(<>)]##[(<>)]##[(<>)]##[(<'+textData;
-	document.getElementById("employeDetailsTextArea").value=textAreaEmployee;
-	
 	
 	// Set empty for all variables
 	form_organization.value='';
@@ -122,6 +165,37 @@ function addToEmplyeeSec(){
 	document.getElementById("working_till_div_section").hidden=false;
 	
 	$('#addEmployment').modal('hide');
+}
+
+function deleteEmployee(empid){
+	document.getElementById(empid).hidden = true;
+	empDetails.delete(empid);
+	document.getElementById("employeDetailsTextArea").value='';
+	var employeeDetails = empDetails.values(); 
+	for(var em of employeeDetails) {
+		addToTextArea(em);
+	}
+}
+
+function split(s) {
+	  return s.split(".\n");
+}
+
+function addToTextArea(emp){
+	var textData='';
+	textData=textData+'organization:'+emp.get("form_organization")+'>)]##[(<';
+	textData=textData+'designation:'+emp.get("form_designation")+'>)]##[(<';
+	textData=textData+'MonthWorkingFrom:'+emp.get("selectMonthWorkingFrom")+'>)]##[(<';
+	textData=textData+'YearWorkingFrom:'+emp.get("selectYearWorkingFrom")+'>)]##[(<';
+	if(emp.get("isCurrentCompany")){
+		textData=textData+'MonthWorkingTill:'+emp.get("selectMonthWorkingTill")+'>)]##[(<';
+		textData=textData+'YearWorkingTill:'+emp.get("selectYearWorkingTill")+'>)]##[(<';
+	}
+	textData=textData+'Description:'+emp.get("organization_description");
+	
+	var textAreaEmployee=document.getElementById("employeDetailsTextArea").value;
+	textAreaEmployee=textAreaEmployee+'>)]##[(<>)]##[(<>)]##[(<>)]##[(<'+textData;
+	document.getElementById("employeDetailsTextArea").value=textAreaEmployee;
 }
 
 function addToEducationSec(){
@@ -300,6 +374,101 @@ $(window).on('load',function(){
     $('#publishProfile').modal('show');
 });
 
+$("#collapseTwo").on('show.bs.collapse', function(e){
+	let $collapsedTarget = $(e.target),
+	skills = $collapsedTarget.attr('data');
+	skills = skills.slice(1,-1);
+	skills = skills.split(", ");
+	index = 0;
+	while (index < skills.length) { 
+	    skillSet.set(skills[index]+'_'+index, skills[index]);
+	    index++; 
+	}
+	incrementByOne=index;
+});
+
+$("#collapseThree").on('show.bs.collapse', function(e){
+	let $collapsedTarget = $(e.target);
+	if($collapsedTarget.attr('data')){
+	emp = JSON.parse($collapsedTarget.attr('data'));
+	for (i = 0; i < emp.length; i++) {
+		var e = emp[i];
+		var employee = new Map();
+		employee.set("form_organization", e.organisation);
+		employee.set("form_designation", e.designation);
+		employee.set("selectMonthWorkingFrom", e.monthWorkingFrom);
+		employee.set("selectYearWorkingFrom", e.yearWorkingFrom);
+		var key_id=e.organisation+"_"+e.designation+"_"+e.yearWorkingFrom+"_"+e.monthWorkingFrom;
+		if(!e.currentCompany){
+			employee.set("selectMonthWorkingTill", e.monthWorkingTill);
+			employee.set("selectYearWorkingTill", e.yearWorkingTill);
+		}
+		var desc = e.descriptions;
+		var d='';
+		for (j = 0; j < desc.length; j++) {
+			d = d+desc[j];
+		}
+		employee.set("organization_description", d);
+		addToTextArea(employee);
+		empDetails.set(key_id,employee);
+	 }
+	}
+	
+});
+
+$("#addEmployment").on('show.bs.modal', function(e){
+	var emp_id=e.relatedTarget.dataset.info;
+	var emp=empDetails.get(emp_id);
+	showEmployeeModal(emp,emp_id);
+});
+
+function showEmployeeModal(emp,emp_id){
+	if(emp){
+		document.getElementById('form_organization').value=emp.get("form_organization");
+		document.getElementById('form_designation').value=emp.get("form_designation");
+		document.getElementById('selectYearWorkingFrom').value=emp.get("selectYearWorkingFrom");
+		document.getElementById('selectMonthWorkingFrom').value=emp.get("selectMonthWorkingFrom");
+		if(!emp.get("selectYearWorkingTill") && !emp.get("selectMonthWorkingTill")){
+			document.getElementById('working_till_div_section').hidden=true;
+			document.getElementById('isCurrentCompanyNo').checked=false;
+			document.getElementById('isCurrentCompanyYes').checked=true;
+		}else{
+			document.getElementById('selectYearWorkingTill').value=emp.get("selectYearWorkingTill");
+			document.getElementById('selectMonthWorkingTill').value=emp.get("selectMonthWorkingTill");
+			document.getElementById('isCurrentCompanyNo').checked=true;
+			document.getElementById('isCurrentCompanyYes').checked=false;
+			document.getElementById('working_till_div_section').hidden=false;
+		}
+		document.getElementById('organization_description').value=emp.get("organization_description");
+		
+		document.getElementById('add_employee').hidden=true;
+		if(!document.getElementById('update_employee')){
+		var button = document.createElement("button");
+		button.type = "button";
+		button.id = "update_employee";
+		button.className = "btn btn-primary add-button-emp";
+		button.setAttribute("data-empid", emp_id);
+		var node = document.createTextNode("Update");
+		button.appendChild(node);
+		button.onclick = function(e) {
+			var empid=e.currentTarget.dataset.empid;
+			empDetails.delete(empid);
+			document.getElementById(empid).hidden=true;
+			addToEmplyeeSec();
+			/*Need to test*/
+			document.getElementById("employeDetailsTextArea").value='';
+			var employeeDetails = empDetails.values(); 
+			for(var em of employeeDetails) {
+				addToTextArea(em);
+			}
+			document.getElementById('add_employee').hidden=false;
+			document.getElementById('update_employee').hidden=true;
+		};
+		document.getElementById('emp_div_section').appendChild(button);
+		}
+		}
+}
+
 function showDataSave(){
 	document.getElementById('li_nav_item_save').hidden = false;
 }
@@ -346,9 +515,4 @@ function validateForm() {
 	    return false;
 	  }
 	  
-	 /* var address1 = document.forms["form_submit_resume_details"]["address1"].value;
-	  if (address1 == "") {
-	    alert("Please provide atleast one adress.");
-	    return false;
-	  }*/
 	}
