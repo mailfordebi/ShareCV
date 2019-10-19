@@ -89,49 +89,104 @@
       <div class="card-body">
         <div class="form-group basic-info">
     		<label for="fullName">Full Name*</label>
-   			 <input type="text" class="form-control" id="fullName" name="fullName" placeholder="Enter Name">
+    		 <c:if test="${!isEditMode}">
+   			  	<input type="text" class="form-control" id="fullName" name="fullName" placeholder="Enter Name">
+   			 </c:if>
+   			 <c:if test="${isEditMode}">
+   			  	<input type="text" class="form-control" id="fullName" name="fullName" placeholder="Enter Name" value="${cvInfo.fullName}">
+   			 </c:if>
   		</div>
   		<div class="form-group basic-info">
     		<label for="email">Email*</label>
-    		<input type="email" class="form-control" id="email" name="email" placeholder="Email">
+    		<c:if test="${!isEditMode}">
+    			<input type="email" class="form-control" id="email" name="email" placeholder="Email">
+    		</c:if>
+    		<c:if test="${isEditMode}">
+    			<input type="email" class="form-control" id="email" name="email" placeholder="Email" value="${cvInfo.email}">
+    		</c:if>
   		</div>
   		<div class="form-group basic-info">
     		<label for="phone">Phone Numbers*</label>
-    		<input type="text" class="form-control" id="phone" name="phone">
+    		<c:if test="${!isEditMode}">
+    			<input type="text" class="form-control" id="phone" name="phone">
+    		</c:if>
+    		<c:if test="${isEditMode}">
+    			<input type="text" class="form-control" id="phone" name="phone" value="${cvInfo.phoneNumbers}">
+    		</c:if>
     		<small id="phoneHelp" class="form-text text-muted">If you have more than one number, separate with commas.</small>
   		</div>
   		<div class="form-group basic-info">
     		<label for="websites">Websites</label>
-    		<input type="text" class="form-control" id="websites" name="websites">
+    		<c:if test="${!isEditMode}">
+    			<input type="text" class="form-control" id="websites" name="websites">
+    		</c:if>
+    		<c:if test="${isEditMode}">
+    			<input type="text" class="form-control" id="websites" name="websites" value="${cvInfo.website}">
+    		</c:if>
     		<small id="websitesHelp" class="form-text text-muted">If you have more than one URL, separate with commas.</small>
   		</div>
   		<div class="form-group basic-info">
     		<label for="address1">Address Line 1</label>
-   			 <input type="text" class="form-control" id="address1" name="address1">
+    		 <c:if test="${!isEditMode}">
+   			 	<input type="text" class="form-control" id="address1" name="address1">
+   			 </c:if>
+   			 <c:if test="${isEditMode}">
+   			 	<input type="text" class="form-control" id="address1" name="address1" value="${cvInfo.address1}">
+   			 </c:if>
   		</div>
   		<div class="form-group basic-info">
     		<label for="address2">Address Line 2</label>
-    		<input type="text" class="form-control" id="address2" name="address2">
+    		<c:if test="${!isEditMode}">
+    			<input type="text" class="form-control" id="address2" name="address2">
+    		</c:if>
+    		<c:if test="${isEditMode}">
+    			<input type="text" class="form-control" id="address2" name="address2" value="${cvInfo.address1}">
+    		</c:if>
   		</div>
   		<div class="form-group basic-info">
     		<label for="facebook">Facebook Profile</label>
-    		<input type="text" class="form-control" id="facebook" name="facebook">
+    		<c:if test="${!isEditMode}">
+    			<input type="text" class="form-control" id="facebook" name="facebook">
+    		</c:if>
+    		<c:if test="${isEditMode}">
+    			<input type="text" class="form-control" id="facebook" name="facebook" value="${cvInfo.facebook}">
+    		</c:if>
   		</div>
   		<div class="form-group basic-info">
     		<label for="twitter">Twitter Profile</label>
-    		<input type="text" class="form-control" id="twitter" name="twitter">
+    		<c:if test="${!isEditMode}">
+    			<input type="text" class="form-control" id="twitter" name="twitter">
+    		</c:if>
+    		<c:if test="${isEditMode}">
+    			<input type="text" class="form-control" id="twitter" name="twitter" value="${cvInfo.twitter}">
+    		</c:if>
   		</div>
   		<div class="form-group basic-info">
     		<label for="github">Github Profile</label>
-    		<input type="text" class="form-control" id="github" name="github">
+    		<c:if test="${!isEditMode}">
+    			<input type="text" class="form-control" id="github" name="github">
+    		</c:if>
+    		<c:if test="${isEditMode}">
+    			<input type="text" class="form-control" id="github" name="github" value="${cvInfo.github}">
+    		</c:if>
   		</div>
   		<div class="form-group basic-info">
     		<label for="stackoverflow">Stack OverFlow Profile</label>
-    		<input type="text" class="form-control" id="stackoverflow" name="stackoverflow">
+    		<c:if test="${!isEditMode}">
+    			<input type="text" class="form-control" id="stackoverflow" name="stackoverflow">
+    		</c:if>
+    		<c:if test="${isEditMode}">
+    			<input type="text" class="form-control" id="stackoverflow" name="stackoverflow" value="${cvInfo.stackoverflow}">
+    		</c:if>
   		</div>
   		<div class="form-group basic-info">
     		<label for="linkedin">LinkedIn Profile</label>
-    		<input type="text" class="form-control" id="linkedin" name="linkedin">
+    		<c:if test="${!isEditMode}">
+    			<input type="text" class="form-control" id="linkedin" name="linkedin">
+    		</c:if>
+    		<c:if test="${isEditMode}">
+    			<input type="text" class="form-control" id="linkedin" name="linkedin" value="${cvInfo.linkedin}">
+    		</c:if>
   		</div>
   		<div class="form-group image-upload basic-info">
         	<div class="input-group">
@@ -143,7 +198,12 @@
             </span>
        		</div>
        		<div>
-       			<img id='img-upload'/>
+       			<c:if test="${!isEditMode}">
+       				<img id='img-upload' src="img/human.png"/>
+       			</c:if>
+       			<c:if test="${isEditMode}">
+       				<img id='img-upload' src="data:image/jpeg;base64,${cvInfo.profileImage}"/>
+       			</c:if>
        		</div>
     	</div>
       </div>
@@ -162,12 +222,24 @@
         </button>
       </h5>
     </div>
-    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+    
+    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion" data="${cvInfo.skills}">
       <div class="card-body">
       		<input type="text" class="form-control skillset-info" id="skillText" onkeypress="addValue(this);">
    			<small id="websitesHelp" class="form-text text-muted">Press "Enter" Key to add your skill</small>
-   			<div class="skill-lebel-div" id="skillLabel">
-  			</div>
+   			<%-- <c:if test="${!isEditMode}"> --%>
+   				<div class="skill-lebel-div" id="skillLabel">
+   				  <c:if test="${isEditMode}">
+   					<c:forEach var="i" begin="0" end="${fn:length(cvInfo.skills)-1}">
+   						<span id="${cvInfo.skills[i]}_${i}" class="label label-default skill-label">
+   							${cvInfo.skills[i]}
+   							<button type="button" class="close close-button-skill" onclick="removeSkill(this)">
+   								<span>x</span>
+   							</button>
+   						</span>
+   					</c:forEach>
+   				  </c:if>	
+  				</div>
   			<!-- Need to send this to server for skills details and filter this -->
   			<textarea class="form-control skillset-info" id="skillSetTextArea" name="skillSetTextArea" rows="3" hidden="true"></textarea>
       </div>
@@ -186,11 +258,35 @@
         </button>
       </h5>
     </div>
-    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion" data='${empDetails}'>
       <div class="card-body">
         <button type="button" class="btn btn-info btn-lg btn-info-emp" data-toggle="modal" data-target="#addEmployment">Add Employment</button>
         <div id="addEmploymentDIV" class="add-employment-div-sec">
-        	
+			<c:if test="${isEditMode}">
+			 <c:forEach items="${cvInfo.employements}" var="emp">
+			   <div class="card" id="${emp.organisation}_${emp.designation}_${emp.yearWorkingFrom}_${emp.monthWorkingFrom}">
+				<div class="card-body card-body-div">
+					<div class="edit-trash-div">
+						<i class="fa fa-edit edit-trash-style" data-toggle="modal" data-target="#addEmployment" id="edit_trash_emp" data-info="${emp.organisation}_${emp.designation}_${emp.yearWorkingFrom}_${emp.monthWorkingFrom}"></i>
+						<i class="fa fa-trash edit-trash-style" onclick="deleteEmployee('${emp.organisation}_${emp.designation}_${emp.yearWorkingFrom}_${emp.monthWorkingFrom}')"></i>
+					</div>
+					${emp.organisation}<br>
+					${emp.designation}<br>
+					${emp.monthWorkingFrom} ${emp.yearWorkingFrom} - 
+					<c:if test="${!emp.currentCompany}">
+						${emp.monthWorkingTill} ${emp.yearWorkingTill}
+					</c:if>
+					<c:if test="${emp.currentCompany}">
+					 Present
+					</c:if>
+					<br>
+					<c:forEach items="${emp.descriptions}" var="desc">
+						# ${desc}<br>
+					</c:forEach>
+				</div>
+			  </div>	
+			</c:forEach>
+			</c:if>        	
         </div>
         
         <!-- Need to send this to server for emplyement details and filter this -->
@@ -492,9 +588,9 @@
    			 	<textarea class="form-control" rows="5" id="organization_description" placeholder="Type here..."></textarea>
   			</div>          
           </div>
-          <div class="emp-div-button">
+          <div class="emp-div-button" id="emp_div_section">
           <button type="button" class="btn btn-link btn-cancel-emp" data-dismiss="modal">Cancel</button>
-          <button type="button" class="btn btn-primary add-button-emp" onclick="addToEmplyeeSec()">Add</button>
+          <button type="button" class="btn btn-primary add-button-emp" onclick="addToEmplyeeSec()" id="add_employee">Add</button>
           </div>
         </div>
       </div>

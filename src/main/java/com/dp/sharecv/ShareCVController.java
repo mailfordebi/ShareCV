@@ -36,6 +36,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.Gson;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.PageSize;
 import com.itextpdf.text.pdf.PdfWriter;
@@ -111,8 +112,13 @@ public class ShareCVController {
 
 	// TODO Need to add all the pre defined data
 	@RequestMapping("/editProfile")
-	public ModelAndView editProfile() {
+	public ModelAndView editProfile(HttpServletRequest request) {
 		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.addObject("isEditMode", true);
+		Gson gson = new Gson();
+		CVInfo cv = (CVInfo) request.getSession().getAttribute("cvInfo");
+	    String empDetails = gson.toJson(cv.getEmployements());
+	    modelAndView.addObject("empDetails", empDetails);
 		modelAndView.setViewName("resume_builder");
 		return modelAndView;
 	}
@@ -384,6 +390,7 @@ public class ShareCVController {
 		cvInfo.setFullName(fullName);
 		cvInfo.setEmail(email);
 		if (!StringUtils.isEmpty(phone)) {
+			cvInfo.setPhoneNumbers(phone);
 			StringTokenizer tokenizer = new StringTokenizer(phone, ",");
 			while (tokenizer.hasMoreElements()) {
 				String ph = (String) tokenizer.nextElement();
@@ -395,6 +402,7 @@ public class ShareCVController {
 		}
 
 		if (!StringUtils.isEmpty(websites)) {
+			cvInfo.setWebsite(websites);
 			StringTokenizer tokenizer = new StringTokenizer(websites, ",");
 			while (tokenizer.hasMoreElements()) {
 				String wb = (String) tokenizer.nextElement();

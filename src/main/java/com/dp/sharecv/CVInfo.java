@@ -8,14 +8,16 @@ import java.util.Map;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collection="cv")
+@Document(collection = "cv")
 public class CVInfo {
 	@Id
 	private String email_id;
 	private String fullName;
 	private String email;
 	private List<String> phoneNos;
+	private String phoneNumbers;
 	private List<String> websites;
+	private String website;
 	private String address1;
 	private String address2;
 	private String facebook;
@@ -200,6 +202,22 @@ public class CVInfo {
 
 	public void setEmail_id(String email_id) {
 		this.email_id = email_id;
+	}
+
+	public String getPhoneNumbers() {
+		return phoneNumbers;
+	}
+
+	public void setPhoneNumbers(String phoneNumbers) {
+		this.phoneNumbers = phoneNumbers;
+	}
+	
+	public String getWebsite() {
+		return website;
+	}
+
+	public void setWebsite(String website) {
+		this.website = website;
 	}
 
 	@Override

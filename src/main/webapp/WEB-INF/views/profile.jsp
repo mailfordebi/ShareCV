@@ -158,7 +158,7 @@
            				 <div class="subheading mb-3">${employement.organisation}</div>
            				 <p class="text-decoration">
            				 	 <c:forEach var="desc" items="${employement.descriptions}">
-           				 	 	${desc}.<br>
+           				 	 	${desc}<br>
            				 	 </c:forEach>
            				 </p>
         			 </div>
@@ -210,7 +210,7 @@
             <h5 class="h5-md-12">Roles & Responsibilities</h5>
             <p class="text-decoration">
               <c:forEach var="respnb" items="${project.responsibilities}">
-              	${respnb}.<br>
+              	${respnb}<br>
               </c:forEach>
 			</p>
           </div>

@@ -1,5 +1,7 @@
 package com.dp.sharecv;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -49,11 +51,12 @@ public class CVDao {
 		User user = (User) mongoOperations.findOne(query, User.class);
 		return user;
 	}
-	
+
 	public CVInfo getCVDetails(String email) {
 		Query query = new Query();
 		query.addCriteria(Criteria.where("email").is(email));
 		CVInfo cv = (CVInfo) mongoOperations.findOne(query, CVInfo.class);
+		addAdditionalInfo(cv);
 		return cv;
 	}
 
@@ -65,4 +68,26 @@ public class CVDao {
 		mongoOperations.updateFirst(query, update, User.class);
 		return true;
 	}
+
+	// This is required for editing profile.
+	private void addAdditionalInfo(CVInfo cv) {
+		List<String> phoneNos = cv.getPhoneNos();
+		if (!phoneNos.isEmpty()) {
+			StringBuilder str = new StringBuilder(phoneNos.get(0));
+			for (int i = 1; i < phoneNos.size(); i++) {
+				str.append(",").append(phoneNos.get(i));
+			}
+			cv.setPhoneNumbers(str.toString());
+		}
+
+		List<String> wb = cv.getWebsites();
+		if (!wb.isEmpty()) {
+			StringBuilder str = new StringBuilder(wb.get(0));
+			for (int i = 1; i < wb.size(); i++) {
+				str.append(",").append(wb.get(i));
+			}
+			cv.setWebsite(str.toString());
+		}
+	}
+
 }

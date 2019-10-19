@@ -1414,3 +1414,17 @@ body.mobile-nav-active #mobile-nav-toggle {
 .image-upload {
 	display: flex;
 }
+
+.edit-trash-style {
+	font-size: 24px;
+	cursor: pointer;
+	padding-right: 10px;
+}
+
+.edit-trash-div{
+	float:right;
+}
+
+.card-body-div{
+	cursor: text !important;
+}
